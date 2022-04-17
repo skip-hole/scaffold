@@ -55,7 +55,6 @@ public class DataSourceConfiguration {
         dataSourceMap.put(DataSourceKey.MASTER.humpName(), master());
         dataSourceMap.put(DataSourceKey.SLAVE_ALPHA.humpName(), slaveAlpha());
         dataSourceMap.put(DataSourceKey.SLAVE_BETA.humpName(), slaveBeta());
-        dataSourceMap.put(DataSourceKey.SLAVE_GAMMA.humpName(), slaveGamma());
 
         // Set master datasource as default
         dynamicRoutingDataSource.setDefaultTargetDataSource(master());

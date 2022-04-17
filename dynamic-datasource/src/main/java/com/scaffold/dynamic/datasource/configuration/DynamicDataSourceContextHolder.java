@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author hui.zhang
@@ -13,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class DynamicDataSourceContextHolder {
 
-    private static int counter = 0;
+    private static AtomicInteger counter =new  AtomicInteger(0);
 
     private static final ThreadLocal<String> CONTEXT_HOLDER = ThreadLocal.withInitial(DataSourceKey.MASTER::name);
 
@@ -38,9 +39,9 @@ public class DynamicDataSourceContextHolder {
 
     public static void chooseSlaveDataSource() {
         try {
-            int datasourceKeyIndex = counter % slaveDataSourceKeys.size();
+            int datasourceKeyIndex = counter.get()% slaveDataSourceKeys.size();
             CONTEXT_HOLDER.set(String.valueOf(slaveDataSourceKeys.get(datasourceKeyIndex)));
-            counter++;
+            counter.incrementAndGet();
         } catch (Exception e) {
             chooseMasterDataSource();
         }

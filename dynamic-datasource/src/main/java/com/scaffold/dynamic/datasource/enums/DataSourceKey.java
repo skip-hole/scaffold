@@ -16,11 +16,7 @@ public enum DataSourceKey {
     /**
      * Slave beta data source key.
      */
-    SLAVE_BETA,
-    /**
-     * Slave gamma data source key.
-     */
-    SLAVE_GAMMA;
+    SLAVE_BETA;
 
     public String humpName() {
         String[] splits = this.name().split("_");
