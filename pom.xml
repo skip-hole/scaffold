@@ -16,6 +16,7 @@
         <module>eureka/eureka-server-peer</module>
         <module>eureka/eureka-server-peer2</module>
         <module>hystrix/hystrix-fallback</module>
+        <module>dynamic-datasource</module>
     </modules>
 
     <properties>
