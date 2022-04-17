@@ -15,6 +15,7 @@
         <module>scaffold-auth</module>
         <module>eureka/eureka-server-peer</module>
         <module>eureka/eureka-server-peer2</module>
+        <module>hystrix/hystrix-fallback</module>
     </modules>
 
     <properties>
@@ -59,6 +60,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             </dependency>
 
             <!-- SpringCloud Alibaba 微服务 -->
