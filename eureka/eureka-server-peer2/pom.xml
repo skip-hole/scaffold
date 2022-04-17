@@ -6,28 +6,16 @@
         <artifactId>scaffold</artifactId>
         <groupId>com.scaffold</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>scaffold-auth</artifactId>
+    <artifactId>eureka-server-peer2</artifactId>
 
     <dependencies>
-        <!-- SpringBoot Web -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- SpringBoot Actuator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- JWT -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
 
@@ -37,7 +25,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.scaffold.springcloud.AuthApplication</mainClass>
+                    <mainClass>com.com.scaffold.springcloud.EurekaServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -49,7 +37,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>
