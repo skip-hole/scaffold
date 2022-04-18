@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public List<Product> findProductByName(String name) {
+    public List<Product> findProductList() {
         return productMapper.findProductList();
     }
 }

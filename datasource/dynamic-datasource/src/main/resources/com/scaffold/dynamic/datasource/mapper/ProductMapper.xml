@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffold.dynamic.datasource.mapper.ProductMapper">
     <!--使用MAP方式，代码中自行转换-->
-    <select id="findProductList"
-            resultType="com.scaffold.dynamic.datasource.entity.Product">
+    <select id="findProductList" resultType="com.scaffold.dynamic.datasource.entity.Product">
         select * from product
     </select>
 </mapper>

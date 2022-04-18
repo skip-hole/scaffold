@@ -1,13 +1,19 @@
 package com.scaffold.dynamic.datasource.configuration;
 
 import com.scaffold.dynamic.datasource.enums.DataSourceKey;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,11 +43,6 @@ public class DataSourceConfiguration {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean("slaveGamma")
-    @ConfigurationProperties(prefix = "spring.datasource.hikari.slave-gamma")
-    public DataSource slaveGamma() {
-        return DataSourceBuilder.create().build();
-    }
 
     /**
      * Dynamic data source.
@@ -68,5 +69,25 @@ public class DataSourceConfiguration {
         DynamicDataSourceContextHolder.slaveDataSourceKeys.addAll(dataSourceMap.keySet());
         DynamicDataSourceContextHolder.slaveDataSourceKeys.remove(DataSourceKey.MASTER.humpName());
         return dynamicRoutingDataSource;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "mybatis")
+    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        // Here is very important, if don't config this, will can't switch datasource
+        // put all datasource into SqlSessionFactoryBean, then will autoconfig SqlSessionFactory
+        sqlSessionFactoryBean.setDataSource(dynamicDataSource());
+        return sqlSessionFactoryBean;
+    }
+
+    /**
+     * Transaction manager platform transaction manager.
+     *
+     * @return the platform transaction manager
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dynamicDataSource());
     }
 }
