@@ -2,10 +2,11 @@
  * OPay Inc.
  * Copyright (c) 2016-2022 All Rights Reserved.
  */
-package com.scaffold.dynamic.datasource.controller;
+package com.scaffold.dynamic.datasource.client.controller;
 
-import com.scaffold.dynamic.datasource.entity.Product;
-import com.scaffold.dynamic.datasource.service.ProductService;
+
+import com.scaffold.dynamic.datasource.client.entity.Product;
+import com.scaffold.dynamic.datasource.client.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class ProductController {
 
     @PostMapping("/list")
     public List<Product> list() {
-        return productService.findProductByName("");
+        return productService.findProductList();
     }
 }
 

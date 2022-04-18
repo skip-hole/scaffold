@@ -2,11 +2,11 @@
  * OPay Inc.
  * Copyright (c) 2016-2022 All Rights Reserved.
  */
-package com.scaffold.dynamic.datasource.service.impl;
+package com.scaffold.dynamic.datasource.client.service.impl;
 
-import com.scaffold.dynamic.datasource.entity.Product;
-import com.scaffold.dynamic.datasource.mapper.ProductMapper;
-import com.scaffold.dynamic.datasource.service.ProductService;
+import com.scaffold.dynamic.datasource.client.entity.Product;
+import com.scaffold.dynamic.datasource.client.mapper.ProductMapper;
+import com.scaffold.dynamic.datasource.client.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

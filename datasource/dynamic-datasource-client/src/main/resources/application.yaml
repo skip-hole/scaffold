@@ -1,0 +1,26 @@
+server:
+  port: 50005
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://47.242.129.19:3306/product_master?useSSL=false
+          username: root
+          password: Admin172.31.51.194
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_1:
+          url: jdbc:mysql://47.242.129.19:3306/product_slave_alpha?useSSL=false
+          username: root
+          password: Admin172.31.51.194
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_2:
+          url: jdbc:mysql://47.242.129.19:3306/product_slave_beta?useSSL=false
+          username: root
+          password: Admin172.31.51.194
+          driver-class-name: com.mysql.cj.jdbc.Driver

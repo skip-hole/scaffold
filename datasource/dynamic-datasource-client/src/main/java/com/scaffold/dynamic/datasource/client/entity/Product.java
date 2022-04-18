@@ -2,7 +2,7 @@
  * OPay Inc.
  * Copyright (c) 2016-2022 All Rights Reserved.
  */
-package com.scaffold.dynamic.datasource.entity;
+package com.scaffold.dynamic.datasource.client.entity;
 
 import lombok.Data;
 

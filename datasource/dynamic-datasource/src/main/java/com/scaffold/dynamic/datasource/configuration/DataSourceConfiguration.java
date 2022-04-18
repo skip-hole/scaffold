@@ -26,19 +26,19 @@ public class DataSourceConfiguration {
 
     @Bean("master")
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.hikari.master")
+    @ConfigurationProperties(prefix = "spring.datasource.dynamic.master")
     public DataSource master() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean("slaveAlpha")
-    @ConfigurationProperties(prefix = "spring.datasource.hikari.slave-alpha")
+    @ConfigurationProperties(prefix = "spring.datasource.dynamic.slave-alpha")
     public DataSource slaveAlpha() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean("slaveBeta")
-    @ConfigurationProperties(prefix = "spring.datasource.hikari.slave-beta")
+    @ConfigurationProperties(prefix = "spring.datasource.dynamic.slave-beta")
     public DataSource slaveBeta() {
         return DataSourceBuilder.create().build();
     }

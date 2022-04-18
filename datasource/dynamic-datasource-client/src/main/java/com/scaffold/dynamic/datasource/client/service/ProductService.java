@@ -2,9 +2,9 @@
  * OPay Inc.
  * Copyright (c) 2016-2022 All Rights Reserved.
  */
-package com.scaffold.dynamic.datasource.service;
+package com.scaffold.dynamic.datasource.client.service;
 
-import com.scaffold.dynamic.datasource.entity.Product;
+import com.scaffold.dynamic.datasource.client.entity.Product;
 
 import java.util.List;
 
