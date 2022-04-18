@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author TaoYu
+ * 批量创建数据源
  */
 @Slf4j
 public abstract class AbstractDataSourceProvider implements DynamicDataSourceProvider {

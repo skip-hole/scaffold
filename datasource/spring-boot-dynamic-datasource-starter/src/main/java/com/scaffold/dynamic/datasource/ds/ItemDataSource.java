@@ -30,7 +30,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * @author TaoYu
+ * 包装数据源
  */
 @Slf4j
 @Data

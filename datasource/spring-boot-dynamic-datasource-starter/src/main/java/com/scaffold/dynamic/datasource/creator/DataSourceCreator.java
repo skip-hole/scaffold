@@ -22,11 +22,6 @@ import javax.sql.DataSource;
 
 /**
  * 默认按照以下顺序创建数据源:
- * <pre>
- * 	JNDI(1000) &gt; DRUID(2000) &gt; HIKARI(3000) &gt; BASIC(5000)
- * </pre>
- *
- * @author ls9527
  */
 public interface DataSourceCreator {
 

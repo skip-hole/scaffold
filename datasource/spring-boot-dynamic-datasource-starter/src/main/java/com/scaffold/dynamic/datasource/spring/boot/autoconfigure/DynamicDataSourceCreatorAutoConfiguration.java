@@ -28,9 +28,8 @@ import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
-/**
- * @author TaoYu
- */
+
+
 @Configuration
 public class DynamicDataSourceCreatorAutoConfiguration {
 

@@ -37,8 +37,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * @author TaoYu
- * @since 1.2.0
+ * @author hui.zhang
  */
 public class DynamicDataSourceAnnotationAdvisor extends AbstractPointcutAdvisor implements BeanFactoryAware {
 

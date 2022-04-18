@@ -13,28 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.scaffold.dynamic.datasource.spring.boot.autoconfigure;
-
-import lombok.Data;
-import org.springframework.core.Ordered;
+package com.scaffold.dynamic.datasource.exception;
 
 /**
- * 多数据源aop相关配置
+ * exception when dataSource cannot select
  *
  */
-@Data
-public class DynamicDatasourceAopProperties {
+public class CannotFindDataSourceException extends RuntimeException {
 
-    /**
-     * enabled default DS annotation default true
-     */
-    private Boolean enabled = true;
-    /**
-     * aop order
-     */
-    private Integer order = Ordered.HIGHEST_PRECEDENCE;
-    /**
-     * aop allowedPublicOnly
-     */
-    private Boolean allowedPublicOnly = true;
+    public CannotFindDataSourceException(String message) {
+        super(message);
+    }
+
+    public CannotFindDataSourceException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

@@ -17,9 +17,7 @@ package com.scaffold.dynamic.datasource.tx;
 
 import org.springframework.util.StringUtils;
 
-/**
- * @author funkye
- */
+
 public class TransactionContext {
 
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();

@@ -32,8 +32,6 @@ import static com.scaffold.dynamic.datasource.support.DdConstants.HIKARI_DATASOU
 /**
  * Hikari数据源创建器
  *
- * @author TaoYu
- * @since 2020/1/21
  */
 public class HikariDataSourceCreator extends AbstractDataSourceCreator implements DataSourceCreator, InitializingBean {
 

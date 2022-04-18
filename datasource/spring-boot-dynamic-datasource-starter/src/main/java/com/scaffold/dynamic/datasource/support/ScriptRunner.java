@@ -26,10 +26,6 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
-/**
- * @author TaoYu
- * @since 2020/1/21
- */
 @Slf4j
 @AllArgsConstructor
 public class ScriptRunner {

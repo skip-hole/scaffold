@@ -15,7 +15,6 @@
  */
 package com.scaffold.dynamic.datasource.spring.boot.autoconfigure;
 
-import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.dbcp2.Dbcp2Config;
 import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.hikari.HikariCpConfig;
 import com.scaffold.dynamic.datasource.strategy.DynamicDataSourceStrategy;
 import com.scaffold.dynamic.datasource.strategy.LoadBalanceDynamicDataSourceStrategy;
@@ -34,7 +33,6 @@ import java.util.Map;
  * DynamicDataSourceProperties
  *
  * @see DataSourceProperties
- * @since 1.0.0
  */
 @Slf4j
 @Getter

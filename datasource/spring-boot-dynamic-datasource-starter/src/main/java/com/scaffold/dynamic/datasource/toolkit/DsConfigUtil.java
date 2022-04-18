@@ -25,9 +25,6 @@ import java.util.regex.Pattern;
 
 /**
  * 动态数据源配置相关工具类
- *
- * @author Taoyu
- * @since 3.5.0
  */
 public final class DsConfigUtil {
 

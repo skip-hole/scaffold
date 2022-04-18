@@ -17,9 +17,6 @@ package com.scaffold.dynamic.datasource.support;
 
 /**
  * 动态数据源常量
- *
- * @author jobob
- * @since 2019-10-08
  */
 public interface DdConstants {
 

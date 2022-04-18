@@ -31,8 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Core Interceptor of Dynamic Datasource
  *
- * @author TaoYu
- * @since 1.2.0
+ * @author hui.zhang
  */
 public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor {
 

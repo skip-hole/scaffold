@@ -22,9 +22,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-/**
- * @author funkye
- */
 @Slf4j
 public class ConnectionProxy implements Connection {
 

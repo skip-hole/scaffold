@@ -16,8 +16,7 @@
 package com.scaffold.dynamic.datasource.spring.boot.autoconfigure;
 
 /**
- * @author hzh727172424
- * @since 3.4.0
+ * 自定义回调接口
  */
 public interface DynamicDataSourcePropertiesCustomizer {
 

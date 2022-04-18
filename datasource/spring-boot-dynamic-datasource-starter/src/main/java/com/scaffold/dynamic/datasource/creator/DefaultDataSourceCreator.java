@@ -25,8 +25,6 @@ import java.util.List;
 /**
  * 数据源创建器
  *
- * @author TaoYu
- * @since 2.3.0
  */
 @Slf4j
 @Setter

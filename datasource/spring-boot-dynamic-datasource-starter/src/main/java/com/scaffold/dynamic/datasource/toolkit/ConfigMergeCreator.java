@@ -32,7 +32,6 @@ import java.util.Properties;
  *
  * @param <C> 自己的配置类
  * @param <T> 目标的配置类
- * @author TaoYu
  */
 @Slf4j
 @AllArgsConstructor

@@ -22,8 +22,6 @@ import java.util.Set;
 
 /**
  * Dbcp2 的配置
- *
- * @author TaoYu
  */
 @Data
 public class Dbcp2Config {

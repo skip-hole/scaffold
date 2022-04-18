@@ -22,9 +22,6 @@ import java.util.UUID;
 
 /**
  * 本地事务工具类
- *
- * @author TaoYu
- * @since 3.5.0
  */
 @Slf4j
 public final class LocalTxUtil {

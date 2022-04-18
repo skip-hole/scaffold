@@ -34,8 +34,6 @@ import java.util.Properties;
 /**
  * Master-slave Separation Plugin with mybatis
  *
- * @author TaoYu
- * @since 2.5.1
  */
 @Intercepts({
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),

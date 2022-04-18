@@ -19,9 +19,6 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author funkye
- */
 public class ConnectionFactory {
 
     private static final ThreadLocal<Map<String, ConnectionProxy>> CONNECTION_HOLDER =

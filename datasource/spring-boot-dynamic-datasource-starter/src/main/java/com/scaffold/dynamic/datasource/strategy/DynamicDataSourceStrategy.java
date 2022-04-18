@@ -19,11 +19,8 @@ import java.util.List;
 
 /**
  * The interface of dynamic datasource switch strategy
- *
- * @author TaoYu Kanyuxia
  * @see RandomDynamicDataSourceStrategy
  * @see LoadBalanceDynamicDataSourceStrategy
- * @since 1.0.0
  */
 public interface DynamicDataSourceStrategy {
 

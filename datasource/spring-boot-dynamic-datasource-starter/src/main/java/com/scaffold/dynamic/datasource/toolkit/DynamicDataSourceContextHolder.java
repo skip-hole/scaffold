@@ -24,8 +24,6 @@ import java.util.Deque;
 /**
  * 核心基于ThreadLocal的切换数据源工具类
  *
- * @author TaoYu Kanyuxia
- * @since 1.0.0
  */
 public final class DynamicDataSourceContextHolder {
 

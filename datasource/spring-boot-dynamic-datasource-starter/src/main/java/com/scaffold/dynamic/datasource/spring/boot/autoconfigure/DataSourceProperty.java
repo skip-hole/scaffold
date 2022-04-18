@@ -24,10 +24,6 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import javax.sql.DataSource;
 
-/**
- * @author TaoYu
- * @since 1.2.0
- */
 @Slf4j
 @Data
 @Accessors(chain = true)
