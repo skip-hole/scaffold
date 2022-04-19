@@ -4,7 +4,6 @@
  */
 package com.scaffold.dynamic.datasource.client.mapper;
 
-import com.scaffold.dynamic.datasource.annotation.DS;
 import com.scaffold.dynamic.datasource.client.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,6 +16,5 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
 
-    @DS("slave_1")
     List<Product> findProductList();
 }

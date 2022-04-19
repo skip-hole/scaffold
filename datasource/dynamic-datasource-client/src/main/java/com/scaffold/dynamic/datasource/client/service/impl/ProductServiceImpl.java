@@ -4,6 +4,7 @@
  */
 package com.scaffold.dynamic.datasource.client.service.impl;
 
+import com.scaffold.dynamic.datasource.annotation.DS;
 import com.scaffold.dynamic.datasource.client.entity.Product;
 import com.scaffold.dynamic.datasource.client.mapper.ProductMapper;
 import com.scaffold.dynamic.datasource.client.service.ProductService;
@@ -22,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductMapper productMapper;
 
+    @DS("slave")
     @Override
     public List<Product> findProductList() {
         return productMapper.findProductList();

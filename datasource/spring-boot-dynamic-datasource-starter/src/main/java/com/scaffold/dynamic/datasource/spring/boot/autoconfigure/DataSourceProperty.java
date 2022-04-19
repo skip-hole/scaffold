@@ -15,7 +15,6 @@
  */
 package com.scaffold.dynamic.datasource.spring.boot.autoconfigure;
 
-import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.dbcp2.Dbcp2Config;
 import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.hikari.HikariCpConfig;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -34,7 +33,7 @@ public class DataSourceProperty {
      */
     private String poolName;
     /**
-     * 连接池类型，如果不设置自动查找 Druid > HikariCp
+     * 连接池类型，如果不设置自动查找 HikariCp
      */
     private Class<? extends DataSource> type;
     /**
@@ -54,37 +53,14 @@ public class DataSourceProperty {
      */
     private String password;
     /**
-     * jndi数据源名称(设置即表示启用)
-     */
-    private String jndiName;
-    /**
-     * 是否启用seata
-     */
-    private Boolean seata = true;
-    /**
-     * 是否启用p6spy
-     */
-    private Boolean p6spy = true;
-    /**
      * lazy init datasource
      */
     private Boolean lazy;
-    /**
-     * 初始化
-     */
-    @NestedConfigurationProperty
-    private DatasourceInitProperties init = new DatasourceInitProperties();
     /**
      * HikariCp参数配置
      */
     @NestedConfigurationProperty
     private HikariCpConfig hikari = new HikariCpConfig();
-    /**
-     * DBCP2参数配置
-     */
-    @NestedConfigurationProperty
-    private Dbcp2Config dbcp2 = new Dbcp2Config();
-
     /**
      * 解密公匙(如果未设置默认使用全局的)
      */

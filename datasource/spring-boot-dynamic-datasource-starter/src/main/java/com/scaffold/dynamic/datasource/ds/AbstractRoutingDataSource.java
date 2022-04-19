@@ -19,8 +19,8 @@ import com.scaffold.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.scaffold.dynamic.datasource.tx.ConnectionFactory;
 import com.scaffold.dynamic.datasource.tx.ConnectionProxy;
 import com.scaffold.dynamic.datasource.tx.TransactionContext;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.datasource.AbstractDataSource;
-import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

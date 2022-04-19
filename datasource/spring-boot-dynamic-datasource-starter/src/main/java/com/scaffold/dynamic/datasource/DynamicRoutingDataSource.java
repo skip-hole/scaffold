@@ -19,6 +19,7 @@ import com.scaffold.dynamic.datasource.ds.AbstractRoutingDataSource;
 import com.scaffold.dynamic.datasource.ds.GroupDataSource;
 import com.scaffold.dynamic.datasource.ds.ItemDataSource;
 import com.scaffold.dynamic.datasource.exception.CannotFindDataSourceException;
+import com.scaffold.dynamic.datasource.exception.ErrorCreateDataSourceException;
 import com.scaffold.dynamic.datasource.provider.DynamicDataSourceProvider;
 import com.scaffold.dynamic.datasource.strategy.DynamicDataSourceStrategy;
 import com.scaffold.dynamic.datasource.strategy.LoadBalanceDynamicDataSourceStrategy;
@@ -40,9 +41,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 核心动态数据源组件
- *
- * @author TaoYu Kanyuxia
- * @since 1.0.0
  */
 @Slf4j
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource implements InitializingBean, DisposableBean {
@@ -147,7 +145,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource implemen
                     groupDataSource = new GroupDataSource(group, strategy.getDeclaredConstructor().newInstance());
                     groupDataSources.put(group, groupDataSource);
                 } catch (Exception e) {
-                    throw new RuntimeException("dynamic-datasource - add the datasource named " + ds + " error", e);
+                    throw new ErrorCreateDataSourceException("dynamic-datasource - add the datasource named " + ds + " error", e);
                 }
             }
             groupDataSource.addDatasource(ds, dataSource);

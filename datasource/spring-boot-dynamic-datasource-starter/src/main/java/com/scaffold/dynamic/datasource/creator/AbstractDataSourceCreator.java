@@ -17,9 +17,7 @@ package com.scaffold.dynamic.datasource.creator;
 
 import com.scaffold.dynamic.datasource.ds.ItemDataSource;
 import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.DatasourceInitProperties;
 import com.scaffold.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
-import com.scaffold.dynamic.datasource.support.ScriptRunner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -58,28 +56,7 @@ public abstract class AbstractDataSourceCreator implements DataSourceCreator {
             dataSourceProperty.setLazy(lazy);
         }
         DataSource dataSource = doCreateDataSource(dataSourceProperty);
-        this.runScrip(dataSource, dataSourceProperty);
-        return wrapDataSource(dataSource, dataSourceProperty);
+        return new ItemDataSource(dataSourceProperty.getPoolName(), dataSource, dataSource);
     }
 
-    private void runScrip(DataSource dataSource, DataSourceProperty dataSourceProperty) {
-        DatasourceInitProperties initProperty = dataSourceProperty.getInit();
-        String schema = initProperty.getSchema();
-        String data = initProperty.getData();
-        if (StringUtils.hasText(schema) || StringUtils.hasText(data)) {
-            ScriptRunner scriptRunner = new ScriptRunner(initProperty.isContinueOnError(), initProperty.getSeparator());
-            if (StringUtils.hasText(schema)) {
-                scriptRunner.runScript(dataSource, schema);
-            }
-            if (StringUtils.hasText(data)) {
-                scriptRunner.runScript(dataSource, data);
-            }
-        }
-    }
-
-    private DataSource wrapDataSource(DataSource dataSource, DataSourceProperty dataSourceProperty) {
-        String name = dataSourceProperty.getPoolName();
-        DataSource targetDataSource = dataSource;
-        return new ItemDataSource(name, dataSource, targetDataSource);
-    }
 }

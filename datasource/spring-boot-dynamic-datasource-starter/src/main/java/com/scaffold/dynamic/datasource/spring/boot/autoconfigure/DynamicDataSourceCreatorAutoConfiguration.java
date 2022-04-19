@@ -33,7 +33,7 @@ import java.util.List;
 @Configuration
 public class DynamicDataSourceCreatorAutoConfiguration {
 
-    public static final int HIKARI_ORDER = 3000;
+    public static final int HIKARI_ORDER = 1000;
 
     @Primary
     @Bean
