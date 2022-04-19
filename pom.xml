@@ -11,8 +11,8 @@
 
 
     <modules>
-        <module>scaffold-gateway</module>
-        <module>scaffold-auth</module>
+        <module>gateway/scaffold-gateway</module>
+        <module>authentication/scaffold-auth</module>
         <module>eureka/eureka-server-peer</module>
         <module>eureka/eureka-server-peer2</module>
         <module>hystrix/hystrix-fallback</module>
