@@ -19,6 +19,7 @@
         <module>datasource/dynamic-datasource</module>
         <module>datasource/spring-boot-dynamic-datasource-starter</module>
         <module>datasource/dynamic-datasource-client</module>
+        <module>statemachine/scaffold-statemachine</module>
     </modules>
 
     <properties>

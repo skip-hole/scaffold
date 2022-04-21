@@ -1,0 +1,29 @@
+
+spring:
+  application:
+    name: statemachine
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 20006
+  address: localhost
+
+
+## 开启所有actuator-endpoint
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false
+
+
+
+
