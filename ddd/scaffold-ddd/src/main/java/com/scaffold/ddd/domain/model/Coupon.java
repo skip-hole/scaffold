@@ -1,5 +1,6 @@
 package com.scaffold.ddd.domain.model;
 
+import com.scaffold.ddd.domain.shared.CouponTypeEnum;
 import com.scaffold.ddd.domain.shared.Entity;
 
 import java.math.BigDecimal;
@@ -12,20 +13,28 @@ import java.time.LocalDateTime;
 public class Coupon implements Entity<Coupon> {
 
     private Long id;
-
+    /**
+     * 优惠券名称
+     */
     private String name;
 
-    private String couponNo;
+    private String batchNo;
     /**
      * 优惠券类型 1、代金券 2、满减券 3、折扣券
      */
-    private int couponType;
+    private CouponTypeEnum type;
+    /**
+     * 优惠券规则 eg 满减 {"fullAmount":300,"reduceAmount:100}
+     */
+    private String rule;
+
     /**
      * 面额
      */
     private BigDecimal couponAmount;
 
     private BigDecimal maxCouponAmount;
+
     /**
      * 投放类型 1、所有用户 2、新用户
      */
