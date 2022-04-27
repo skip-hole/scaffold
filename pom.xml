@@ -22,6 +22,7 @@
         <module>statemachine/scaffold-statemachine</module>
         <module>ddd/scaffold-ddd</module>
         <module>ddd/scaffold-ddd</module>
+        <module>datasync/canal-client</module>
     </modules>
 
     <properties>
