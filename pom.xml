@@ -22,7 +22,9 @@
         <module>statemachine/scaffold-statemachine</module>
         <module>ddd/scaffold-ddd</module>
         <module>ddd/scaffold-ddd</module>
-        <module>datasync/canal-client</module>
+        <module>canal/canal-client</module>
+        <module>canal/spring-boot-canal-starter</module>
+        <module>canal/canal-example</module>
     </modules>
 
     <properties>
