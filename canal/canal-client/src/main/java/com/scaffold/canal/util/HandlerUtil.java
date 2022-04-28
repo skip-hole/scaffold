@@ -8,34 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author yang peng
- * @date 2019/3/2713:33
- */
+
 public class HandlerUtil {
-
-
-    public static EntryHandler getEntryHandler(List<? extends EntryHandler> entryHandlers, String tableName) {
-        EntryHandler globalHandler = null;
-        for (EntryHandler handler : entryHandlers) {
-            String canalTableName = getCanalTableName(handler);
-            if ("all".equals(canalTableName)) {
-                globalHandler = handler;
-                continue;
-            }
-            if (tableName.equals(canalTableName)) {
-                return handler;
-            }
-            String name = GenericUtil.getTableGenericProperties(handler);
-            if (name != null) {
-                if (name.equals(tableName)) {
-                    return handler;
-                }
-            }
-        }
-        return globalHandler;
-    }
-
 
     public static Map<String, EntryHandler> getTableHandlerMap(List<? extends EntryHandler> entryHandlers) {
         Map<String, EntryHandler> map = new ConcurrentHashMap<>();
@@ -58,9 +32,6 @@ public class HandlerUtil {
 
     public static EntryHandler getEntryHandler(Map<String, EntryHandler> map, String tableName) {
         EntryHandler entryHandler = map.get(tableName);
-        if (entryHandler == null) {
-            return map.get("all");
-        }
         return entryHandler;
     }
 

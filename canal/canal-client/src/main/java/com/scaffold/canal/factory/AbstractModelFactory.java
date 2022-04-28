@@ -10,10 +10,6 @@ public abstract class AbstractModelFactory<T> implements IModelFactory<T> {
 
     @Override
     public <R> R newInstance(EntryHandler entryHandler, T t) throws Exception {
-        String canalTableName = HandlerUtil.getCanalTableName(entryHandler);
-        if ("all".equals(canalTableName)) {
-            return (R) t;
-        }
         Class<R> tableClass = GenericUtil.getTableClass(entryHandler);
         if (tableClass != null) {
             return newInstance(tableClass, t);

@@ -5,13 +5,11 @@ import com.scaffold.canal.handler.EntryHandler;
 import com.scaffold.canal.util.EntryUtil;
 import com.scaffold.canal.util.FieldUtil;
 import com.scaffold.canal.util.GenericUtil;
-import com.scaffold.canal.util.HandlerUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 public class EntryColumnModelFactory extends AbstractModelFactory<List<CanalEntry.Column>> {
@@ -19,11 +17,6 @@ public class EntryColumnModelFactory extends AbstractModelFactory<List<CanalEntr
 
     @Override
     public <R> R newInstance(EntryHandler entryHandler, List<CanalEntry.Column> columns) throws Exception {
-        String canalTableName = HandlerUtil.getCanalTableName(entryHandler);
-        if ("all".equals(canalTableName)) {
-            Map<String, String> map = columns.stream().collect(Collectors.toMap(CanalEntry.Column::getName, CanalEntry.Column::getValue));
-            return (R) map;
-        }
         Class<R> tableClass = GenericUtil.getTableClass(entryHandler);
         if (tableClass != null) {
             return newInstance(tableClass, columns);
@@ -33,12 +26,6 @@ public class EntryColumnModelFactory extends AbstractModelFactory<List<CanalEntr
 
     @Override
     public <R> R newInstance(EntryHandler entryHandler, List<CanalEntry.Column> columns, Set<String> updateColumn) throws Exception {
-        String canalTableName = HandlerUtil.getCanalTableName(entryHandler);
-        if ("all".equals(canalTableName)) {
-            Map<String, String> map = columns.stream().filter(column -> updateColumn.contains(column.getName()))
-                    .collect(Collectors.toMap(CanalEntry.Column::getName, CanalEntry.Column::getValue));
-            return (R) map;
-        }
         Class<R> tableClass = GenericUtil.getTableClass(entryHandler);
         if (tableClass != null) {
             R r = tableClass.newInstance();

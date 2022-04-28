@@ -9,9 +9,6 @@ import java.util.Map;
 
 public class MapColumnModelFactory extends AbstractModelFactory<Map<String, String>> {
 
-
-
-
     @Override
     <R> R newInstance(Class<R> c, Map<String, String> valueMap) throws Exception {
         R object = c.newInstance();
