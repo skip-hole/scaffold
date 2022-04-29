@@ -12,6 +12,7 @@ import com.scaffold.canal.handler.impl.SyncFlatMessageHandlerImpl;
 import com.scaffold.canal.properties.CanalKafkaProperties;
 import com.scaffold.canal.properties.CanalProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +32,12 @@ public class KafkaClientAutoConfiguration {
 
 
     private final CanalKafkaProperties canalKafkaProperties;
+    private final List<EntryHandler> entryHandlers;
 
 
-    public KafkaClientAutoConfiguration(CanalKafkaProperties canalKafkaProperties) {
+    public KafkaClientAutoConfiguration(CanalKafkaProperties canalKafkaProperties, List<EntryHandler> entryHandlers) {
         this.canalKafkaProperties = canalKafkaProperties;
+        this.entryHandlers = entryHandlers;
     }
 
 
@@ -46,7 +49,6 @@ public class KafkaClientAutoConfiguration {
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
     public MessageHandler messageHandler(RowDataHandler<List<Map<String, String>>> rowDataHandler,
-                                         List<EntryHandler> entryHandlers,
                                          ExecutorService executorService) {
         return new AsyncFlatMessageHandlerImpl(entryHandlers, rowDataHandler, executorService);
     }
@@ -54,7 +56,8 @@ public class KafkaClientAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
-    public MessageHandler messageHandler(RowDataHandler<List<Map<String, String>>> rowDataHandler, List<EntryHandler> entryHandlers) {
+    @ConditionalOnMissingBean
+    public MessageHandler messageHandler(RowDataHandler<List<Map<String, String>>> rowDataHandler) {
         return new SyncFlatMessageHandlerImpl(entryHandlers, rowDataHandler);
     }
 

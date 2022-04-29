@@ -1,20 +1,32 @@
 package com.scaffold.canal.client;
 
+import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.kafka.KafkaCanalConnector;
 import com.alibaba.otter.canal.protocol.FlatMessage;
 import com.scaffold.canal.handler.MessageHandler;
+import lombok.Builder;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 @Slf4j
+@Builder
+@Data
 public class KafkaCanalClient extends AbstractCanalClient {
 
 
-    public static Builder builder() {
-        return Builder.builder();
-    }
+    private String filter = StringUtils.EMPTY;
+    private Integer batchSize = 1;
+    private Long timeout = 1L;
+    private TimeUnit unit = TimeUnit.SECONDS;
+    private String servers;
+    private String topic;
+    private Integer partition;
+    private String groupId;
+    private MessageHandler messageHandler;
 
 
     @Override
@@ -47,80 +59,8 @@ public class KafkaCanalClient extends AbstractCanalClient {
         connector.disconnect();
     }
 
-
-    public static final class Builder {
-        private String filter = StringUtils.EMPTY;
-        private Integer batchSize = 1;
-        private Long timeout = 1L;
-        private TimeUnit unit = TimeUnit.SECONDS;
-        private String servers;
-        private String topic;
-        private Integer partition;
-        private String groupId;
-        private MessageHandler messageHandler;
-
-        private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder servers(String servers) {
-            this.servers = servers;
-            return this;
-        }
-
-        public Builder topic(String topic) {
-            this.topic = topic;
-            return this;
-        }
-
-        public Builder partition(Integer partition) {
-            this.partition = partition;
-            return this;
-        }
-
-        public Builder groupId(String groupId) {
-            this.groupId = groupId;
-            return this;
-        }
-
-        public Builder filter(String filter) {
-            this.filter = filter;
-            return this;
-        }
-
-        public Builder batchSize(Integer batchSize) {
-            this.batchSize = batchSize;
-            return this;
-        }
-
-        public Builder timeout(Long timeout) {
-            this.timeout = timeout;
-            return this;
-        }
-
-        public Builder unit(TimeUnit unit) {
-            this.unit = unit;
-            return this;
-        }
-
-        public Builder messageHandler(MessageHandler messageHandler) {
-            this.messageHandler = messageHandler;
-            return this;
-        }
-
-        public KafkaCanalClient build() {
-            KafkaCanalConnector connector = new KafkaCanalConnector(servers, topic, partition, groupId, batchSize, true);
-            KafkaCanalClient kafkaCanalClient = new KafkaCanalClient();
-            kafkaCanalClient.setMessageHandler(messageHandler);
-            kafkaCanalClient.setConnector(connector);
-            kafkaCanalClient.filter = this.filter;
-            kafkaCanalClient.unit = this.unit;
-            kafkaCanalClient.batchSize = this.batchSize;
-            kafkaCanalClient.timeout = this.timeout;
-            return kafkaCanalClient;
-        }
+    @Override
+    protected CanalConnector getConnector() {
+        return new KafkaCanalConnector(servers, topic, partition, groupId, batchSize, true);
     }
 }

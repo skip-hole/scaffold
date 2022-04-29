@@ -13,6 +13,7 @@ import com.scaffold.canal.handler.impl.SyncMessageHandlerImpl;
 import com.scaffold.canal.properties.CanalProperties;
 import com.scaffold.canal.properties.CanalSimpleProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +32,12 @@ public class ZookeeperClientAutoConfiguration {
 
 
     private final CanalSimpleProperties canalSimpleProperties;
+    private final List<EntryHandler> entryHandlers;
 
 
-    public ZookeeperClientAutoConfiguration(CanalSimpleProperties canalSimpleProperties) {
+    public ZookeeperClientAutoConfiguration(CanalSimpleProperties canalSimpleProperties, List<EntryHandler> entryHandlers) {
         this.canalSimpleProperties = canalSimpleProperties;
+        this.entryHandlers = entryHandlers;
     }
 
     @Bean
@@ -43,8 +46,8 @@ public class ZookeeperClientAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true",matchIfMissing = true)
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler, List<EntryHandler> entryHandlers,
+    @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
+    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
                                          ExecutorService executorService) {
         return new AsyncMessageHandlerImpl(entryHandlers, rowDataHandler, executorService);
     }
@@ -52,7 +55,8 @@ public class ZookeeperClientAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler, List<EntryHandler> entryHandlers) {
+    @ConditionalOnMissingBean
+    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler) {
         return new SyncMessageHandlerImpl(entryHandlers, rowDataHandler);
     }
 

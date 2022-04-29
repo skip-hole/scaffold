@@ -21,9 +21,6 @@ public abstract class AbstractCanalClient implements CanalClient {
     private Thread workThread;
 
 
-    private CanalConnector connector;
-
-
     protected String filter = StringUtils.EMPTY;
 
 
@@ -34,11 +31,6 @@ public abstract class AbstractCanalClient implements CanalClient {
 
 
     protected TimeUnit unit = TimeUnit.SECONDS;
-
-
-
-    private MessageHandler messageHandler;
-
 
 
     @Override
@@ -62,6 +54,7 @@ public abstract class AbstractCanalClient implements CanalClient {
 
     @Override
     public void process() {
+        CanalConnector connector = getConnector();
         while (flag) {
             try {
                 connector.connect();
@@ -71,7 +64,7 @@ public abstract class AbstractCanalClient implements CanalClient {
                     log.info("获取消息 {}", message);
                     long batchId = message.getId();
                     if (message.getId() != -1 && message.getEntries().size() != 0) {
-                        messageHandler.handleMessage(message);
+                        getMessageHandler().handleMessage(message);
                     }
                     connector.ack(batchId);
                 }
@@ -83,23 +76,8 @@ public abstract class AbstractCanalClient implements CanalClient {
         }
     }
 
-
-    public void setConnector(CanalConnector connector) {
-        this.connector = connector;
-    }
+    protected abstract CanalConnector getConnector();
 
 
-    public void setMessageHandler(MessageHandler messageHandler) {
-        this.messageHandler = messageHandler;
-    }
-
-
-    public CanalConnector getConnector() {
-        return connector;
-    }
-
-
-    public MessageHandler getMessageHandler() {
-        return messageHandler;
-    }
+    protected abstract MessageHandler getMessageHandler();
 }

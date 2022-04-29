@@ -13,6 +13,7 @@ import com.scaffold.canal.handler.impl.SyncMessageHandlerImpl;
 import com.scaffold.canal.properties.CanalProperties;
 import com.scaffold.canal.properties.CanalSimpleProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +32,12 @@ public class ClusterClientAutoConfiguration {
 
 
     private final CanalSimpleProperties canalSimpleProperties;
+    private final List<EntryHandler> entryHandlers;
 
 
-    public ClusterClientAutoConfiguration(CanalSimpleProperties canalSimpleProperties) {
+    public ClusterClientAutoConfiguration(CanalSimpleProperties canalSimpleProperties, List<EntryHandler> entryHandlers) {
         this.canalSimpleProperties = canalSimpleProperties;
+        this.entryHandlers = entryHandlers;
     }
 
     @Bean
@@ -44,7 +47,7 @@ public class ClusterClientAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "true", matchIfMissing = true)
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler, List<EntryHandler> entryHandlers,
+    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler,
                                          ExecutorService executorService) {
         return new AsyncMessageHandlerImpl(entryHandlers, rowDataHandler, executorService);
     }
@@ -52,14 +55,15 @@ public class ClusterClientAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = CanalProperties.CANAL_ASYNC, havingValue = "false")
-    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler, List<EntryHandler> entryHandlers) {
+    @ConditionalOnMissingBean
+    public MessageHandler messageHandler(RowDataHandler<CanalEntry.RowData> rowDataHandler) {
         return new SyncMessageHandlerImpl(entryHandlers, rowDataHandler);
     }
 
 
     @Bean(initMethod = "start", destroyMethod = "stop")
     public ClusterCanalClient clusterCanalClient(MessageHandler messageHandler) {
-        return ClusterCanalClient.Builder.builder().
+        return ClusterCanalClient.builder().
                 canalServers(canalSimpleProperties.getServer())
                 .destination(canalSimpleProperties.getDestination())
                 .userName(canalSimpleProperties.getUserName())
