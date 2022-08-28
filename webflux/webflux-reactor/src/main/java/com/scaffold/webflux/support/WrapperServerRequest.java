@@ -26,18 +26,17 @@ public class WrapperServerRequest extends ServerHttpRequestDecorator {
 
     @Override
     public Flux<DataBuffer> getBody() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         return super.getBody().doOnNext(dataBuffer -> {
             try {
-                Channels.newChannel(baos).write(dataBuffer.asByteBuffer().asReadOnlyBuffer());
-                String bodyStr = new String(baos.toByteArray(), StandardCharsets.UTF_8);
-                exchange.getAttributes().put("requestBody", bodyStr);
-                System.out.println("打印body：" + bodyStr);
+                Channels.newChannel(stream).write(dataBuffer.asByteBuffer().asReadOnlyBuffer());
+                String bodyStr = new String(stream.toByteArray(), StandardCharsets.UTF_8);
+                exchange.getAttributes().put("FLAG_REQUEST", bodyStr);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 try {
-                    baos.close();
+                    stream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
