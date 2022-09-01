@@ -27,6 +27,7 @@
         <module>canal/canal-example</module>
         <module>webflux/webflux-reactor</module>
         <module>algorithm/leetcode</module>
+        <module>webflux/stream-achieve-message</module>
     </modules>
 
     <properties>

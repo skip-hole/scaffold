@@ -1,5 +1,7 @@
-package com.scaffold.webflux.support;
+package com.scaffold.webflux.message;
 
+import com.scaffold.webflux.util.ContextUtils;
+import com.scaffold.webflux.util.MessageUtils;
 import org.reactivestreams.Publisher;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -32,11 +34,13 @@ public class WrapperServerResponse extends ServerHttpResponseDecorator {
             return content;
 
         }).flatMap(bytes -> {
-            String reqBody = exchange.getAttribute("FLAG_REQUEST");
             String respBody = new String(bytes, StandardCharsets.UTF_8);
-            System.out.println("请求reqBody：" + reqBody);
-            System.out.println("返回respBody：" + respBody);
+            exchange.getAttributes().put(MessageUtils.DEV_OPS_RESPONSE, respBody);
+            MessageUtils utils = ContextUtils.getBean(MessageUtils.class);
+            MessageModel message = utils.assembleMessage(exchange);
+            utils.pushMessage(message);
             return Mono.just(exchange.getResponse().bufferFactory().wrap(respBody.getBytes()));
         }));
     }
+
 }

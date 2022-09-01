@@ -1,5 +1,6 @@
-package com.scaffold.webflux.support;
+package com.scaffold.webflux.message;
 
+import com.scaffold.webflux.util.MessageUtils;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.web.server.ServerWebExchange;
@@ -31,7 +32,7 @@ public class WrapperServerRequest extends ServerHttpRequestDecorator {
             try {
                 Channels.newChannel(stream).write(dataBuffer.asByteBuffer().asReadOnlyBuffer());
                 String bodyStr = new String(stream.toByteArray(), StandardCharsets.UTF_8);
-                exchange.getAttributes().put("FLAG_REQUEST", bodyStr);
+                exchange.getAttributes().put(MessageUtils.DEV_OPS_REQUEST, bodyStr);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

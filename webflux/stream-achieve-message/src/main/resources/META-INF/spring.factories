@@ -1,0 +1,5 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.scaffold.webflux.message.MessageAspect,\
+  com.scaffold.webflux.util.MessageUtils,\
+  com.scaffold.webflux.util.ContextUtils

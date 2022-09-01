@@ -1,13 +1,10 @@
 package com.scaffold.webflux.aspect;
 
-import com.scaffold.webflux.support.WrapperServerRequest;
-import com.scaffold.webflux.support.WrapperServerResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerWebExchange;
 
 /**
  * @author hui.zhang
@@ -18,19 +15,17 @@ import org.springframework.web.server.ServerWebExchange;
 public class BodyAspect {
 
 
-    @Pointcut("execution(public * org.springframework.web.reactive.DispatcherHandler.handle(..))")
-    public void pointcut() {
+    @Pointcut("execution(public * com.scaffold.webflux.util.MessageUtils.pushMessage(..))")
+    public void pointcut1() {
 
     }
 
-    @Around("pointcut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("pointcut1()")
+    public Object around1(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
-        ServerWebExchange exchange = (ServerWebExchange) args[0];
-        args[0] = exchange.mutate()
-                .request(new WrapperServerRequest(exchange))
-                .response(new WrapperServerResponse(exchange)).build();
         return joinPoint.proceed(args);
 
     }
+
+
 }
