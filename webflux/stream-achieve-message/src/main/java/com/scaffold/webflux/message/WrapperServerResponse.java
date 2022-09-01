@@ -11,6 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * @author hui.zhang
@@ -37,7 +38,7 @@ public class WrapperServerResponse extends ServerHttpResponseDecorator {
             String respBody = new String(bytes, StandardCharsets.UTF_8);
             exchange.getAttributes().put(MessageUtils.DEV_OPS_RESPONSE, respBody);
             MessageUtils utils = ContextUtils.getBean(MessageUtils.class);
-            MessageModel message = utils.assembleMessage(exchange);
+            Map<String, Object> message = utils.assembleMessage(exchange);
             utils.pushMessage(message);
             return Mono.just(exchange.getResponse().bufferFactory().wrap(respBody.getBytes()));
         }));
