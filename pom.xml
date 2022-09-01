@@ -20,8 +20,6 @@
         <module>datasource/spring-boot-dynamic-datasource-starter</module>
         <module>datasource/dynamic-datasource-client</module>
         <module>statemachine/scaffold-statemachine</module>
-        <module>ddd/scaffold-ddd</module>
-        <module>ddd/scaffold-ddd</module>
         <module>canal/canal-client</module>
         <module>canal/spring-boot-canal-starter</module>
         <module>canal/canal-example</module>
