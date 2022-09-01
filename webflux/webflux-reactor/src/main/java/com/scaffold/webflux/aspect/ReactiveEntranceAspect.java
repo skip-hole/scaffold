@@ -1,5 +1,6 @@
 package com.scaffold.webflux.aspect;
 
+import com.alibaba.fastjson.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,17 +13,18 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class BodyAspect {
+public class ReactiveEntranceAspect {
 
 
-    @Pointcut("execution(public * com.scaffold.webflux.util.MessageUtils.pushMessage(..))")
-    public void pointcut1() {
+    @Pointcut("execution(public * com.scaffold.webflux.util.MessageUtils.subscribeWebFluxMessage(..))")
+    public void pointcut() {
 
     }
 
-    @Around("pointcut1()")
-    public Object around1(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("pointcut()")
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
+        System.out.println("WebFlux报文数据：" + JSON.toJSONString(args[0]));
         return joinPoint.proceed(args);
 
     }

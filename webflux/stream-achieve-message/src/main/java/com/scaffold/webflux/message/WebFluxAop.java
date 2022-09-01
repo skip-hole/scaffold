@@ -11,7 +11,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @date 2022年09月01日 20:15
  */
 @Aspect
-public class MessageAspect {
+public class WebFluxAop {
 
 
     @Pointcut("execution(public * org.springframework.web.reactive.DispatcherHandler.handle(..))")
@@ -24,8 +24,8 @@ public class MessageAspect {
         Object[] args = joinPoint.getArgs();
         ServerWebExchange exchange = (ServerWebExchange) args[0];
         args[0] = exchange.mutate()
-                .request(new WrapperServerRequest(exchange))
-                .response(new WrapperServerResponse(exchange)).build();
+                .request(new WebFluxRequest(exchange))
+                .response(new WebFluxResponse(exchange)).build();
         return joinPoint.proceed(args);
 
     }

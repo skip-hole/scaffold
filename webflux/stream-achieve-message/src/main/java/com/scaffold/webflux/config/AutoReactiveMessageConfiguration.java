@@ -1,6 +1,6 @@
 package com.scaffold.webflux.config;
 
-import com.scaffold.webflux.message.MessageAspect;
+import com.scaffold.webflux.message.WebFluxAop;
 import com.scaffold.webflux.util.ContextUtils;
 import com.scaffold.webflux.util.MessageUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -14,7 +14,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @date 2022年09月01日 22:23
  */
 @Configuration
-public class AutoWebFluxPushMessageConfiguration {
+public class AutoReactiveMessageConfiguration {
 
     @Bean
     public ContextUtils context() {
@@ -29,7 +29,7 @@ public class AutoWebFluxPushMessageConfiguration {
 
     @Bean
     @ConditionalOnClass(DispatcherHandler.class)
-    public MessageAspect messageAspect() {
-        return new MessageAspect();
+    public WebFluxAop messageAspect() {
+        return new WebFluxAop();
     }
 }

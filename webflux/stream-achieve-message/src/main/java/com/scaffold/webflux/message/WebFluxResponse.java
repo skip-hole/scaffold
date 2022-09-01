@@ -17,11 +17,11 @@ import java.util.Map;
  * @author hui.zhang
  * @date 2022年08月28日 12:20
  */
-public class WrapperServerResponse extends ServerHttpResponseDecorator {
+public class WebFluxResponse extends ServerHttpResponseDecorator {
 
     private final ServerWebExchange exchange;
 
-    public WrapperServerResponse(ServerWebExchange exchange) {
+    public WebFluxResponse(ServerWebExchange exchange) {
         super(exchange.getResponse());
         this.exchange = exchange;
     }
@@ -38,8 +38,8 @@ public class WrapperServerResponse extends ServerHttpResponseDecorator {
             String respBody = new String(bytes, StandardCharsets.UTF_8);
             exchange.getAttributes().put(MessageUtils.DEV_OPS_RESPONSE, respBody);
             MessageUtils utils = ContextUtils.getBean(MessageUtils.class);
-            Map<String, Object> message = utils.assembleMessage(exchange);
-            utils.pushMessage(message);
+            Map<String, Object> message = utils.assembleWebFluxMessage(exchange);
+            utils.subscribeWebFluxMessage(message);
             return Mono.just(exchange.getResponse().bufferFactory().wrap(respBody.getBytes()));
         }));
     }

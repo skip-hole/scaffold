@@ -15,11 +15,11 @@ import java.nio.charset.StandardCharsets;
  * @author hui.zhang
  * @date 2022年08月28日 10:02
  */
-public class WrapperServerRequest extends ServerHttpRequestDecorator {
+public class WebFluxRequest extends ServerHttpRequestDecorator {
 
     private final ServerWebExchange exchange;
 
-    public WrapperServerRequest(ServerWebExchange exchange) {
+    public WebFluxRequest(ServerWebExchange exchange) {
         super(exchange.getRequest());
         this.exchange = exchange;
     }
