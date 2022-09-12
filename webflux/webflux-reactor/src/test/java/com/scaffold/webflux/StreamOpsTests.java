@@ -1,9 +1,14 @@
 package com.scaffold.webflux;
 
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -12,6 +17,19 @@ import java.util.concurrent.atomic.AtomicLong;
  * @date 2022年08月27日 19:54
  */
 public class StreamOpsTests {
+
+
+    @Test
+    public void flatMapTest() {
+        StepVerifier.create(Flux.just("flux", "mono")
+                .flatMap(s -> Flux.fromArray(s.split("\\s*"))
+                        .delayElements(Duration.ofMillis(100)))
+                .doOnNext(System.out::println))
+                .expectNextCount(8)
+                .verifyComplete();
+
+
+    }
 
 
     @Test

@@ -8,10 +8,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  * @author hui.zhang
@@ -25,6 +29,17 @@ public class WebfluxApplicationTests {
 
     @Autowired
     WebTestClient webTestClient;
+
+    @Test
+    public void webClientTest(){
+        WebClient webClient = WebClient.builder()
+                .exchangeFunction(clientRequest ->
+                        Mono.just(ClientResponse.create(HttpStatus.OK)
+                                .header("content-type", "application/json")
+                                .body("{ \"key\" : \"value\"}")
+                                .build())
+                ).build();
+    }
 
     @Test
     public void shouldBeAbleToPostOrder() {
