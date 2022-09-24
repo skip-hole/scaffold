@@ -23,9 +23,10 @@
         <module>canal/canal-client</module>
         <module>canal/spring-boot-canal-starter</module>
         <module>canal/canal-example</module>
-        <module>webflux/webflux-reactor</module>
+        <module>web/webflux-reactor</module>
         <module>algorithm/leetcode</module>
-        <module>webflux/reactive-wiretap</module>
+        <module>web/reactive-wiretap</module>
+        <module>web/webmvc-reactor</module>
     </modules>
 
     <properties>

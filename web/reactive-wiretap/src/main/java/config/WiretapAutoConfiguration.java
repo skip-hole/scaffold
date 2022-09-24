@@ -5,14 +5,11 @@ import enhance.repository.RepositoryAnnotationInterceptor;
 import enhance.webflux.WebFluxAop;
 import io.netty.channel.ChannelDuplexHandler;
 import org.springframework.aop.Advisor;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Role;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.mongodb.repository.support.SimpleReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.DispatcherHandler;
@@ -47,7 +44,6 @@ public class WiretapAutoConfiguration {
         return new WebFluxAop();
     }
 
-    @Order(20000)
     @Bean
     @ConditionalOnProperty(prefix = "com.glodon.repeater.wiretap.repository", name = "enabled")
     @ConditionalOnBean({RepositoryFinishWiretap.class})
@@ -57,7 +53,6 @@ public class WiretapAutoConfiguration {
         return advisor;
     }
 
-    @Order(10000)
     @Bean
     @ConditionalOnClass(SimpleReactiveMongoRepository.class)
     public RepositoryFinishWiretap repositoryFinishWiretap() {
@@ -69,6 +64,7 @@ public class WiretapAutoConfiguration {
     public WebClientFinishWiretap webClientFinishWiretap() {
         return new WebClientFinishWiretap();
     }
+
 
 
 }
