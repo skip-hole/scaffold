@@ -26,7 +26,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @date 2022年09月01日 22:23
  */
 @Configuration
-@ConditionalOnProperty(prefix = "com.glodon.repeater.wiretap", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "com.scaffold.reactive.wiretap", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class WiretapAutoConfiguration {
 
     @Bean
@@ -47,7 +47,7 @@ public class WiretapAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "com.glodon.repeater.wiretap.repository", name = "enabled")
+    @ConditionalOnProperty(prefix = "com.scaffold.reactive.wiretap.repository", name = "enabled")
     @ConditionalOnBean({RepositoryFinishWiretap.class})
     public Advisor dynamicDatasourceAnnotationAdvisor() {
         RepositoryAnnotationInterceptor interceptor = new RepositoryAnnotationInterceptor();
