@@ -1,7 +1,6 @@
 package com.scaffold.webmvc.config;
 
-import enhance.resttemplate.MetricInterceptor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import com.scaffold.reactive.enhance.resttemplate.MetricInterceptor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -21,7 +21,8 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class LoggingCustomizer implements WebClientCustomizer {
 
-    @Override public void customize(WebClient.Builder webClientBuilder) {
+    @Override
+    public void customize(WebClient.Builder webClientBuilder) {
         webClientBuilder.filter((request, next) -> {
             logRequest(request);
             return next
