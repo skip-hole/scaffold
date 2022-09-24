@@ -1,6 +1,7 @@
-package com.scaffold.webflux.util;
+package util;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -25,5 +26,9 @@ public class ContextUtils implements ApplicationContextAware {
 
     public static <T> T getBean(String name, Class<T> requiredType) {
         return context.getBean(name, requiredType);
+    }
+
+    public static DefaultListableBeanFactory getDefaultListableBeanFactory() {
+        return (DefaultListableBeanFactory) context.getAutowireCapableBeanFactory();
     }
 }

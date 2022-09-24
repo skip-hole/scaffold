@@ -25,7 +25,7 @@
         <module>canal/canal-example</module>
         <module>webflux/webflux-reactor</module>
         <module>algorithm/leetcode</module>
-        <module>webflux/stream-achieve-message</module>
+        <module>webflux/reactive-wiretap</module>
     </modules>
 
     <properties>

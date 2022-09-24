@@ -26,7 +26,7 @@
 
         <dependency>
             <groupId>com.scaffold</groupId>
-            <artifactId>stream-achieve-message</artifactId>
+            <artifactId>reactive-wiretap</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
