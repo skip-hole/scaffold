@@ -10,11 +10,4 @@ public class Order {
     private String id;
 
     private Long start;
-
-    public Order() {
-    }
-
-    public Order(String id) {
-        this.id = id;
-    }
 }

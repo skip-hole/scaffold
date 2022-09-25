@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.support.SimpleReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.DispatcherHandler;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 
 /**
@@ -69,6 +70,7 @@ public class WiretapAutoConfiguration {
 
 
     @Bean
+    @ConditionalOnBean(WebClient.Builder.class)
     public WebClientCustomizer webClientCustomizer(){
         return new MetricWebClientCustomizer();
     }
